@@ -1,13 +1,17 @@
-"use client"
-import { useParams } from 'next/navigation'
+"use client";
+import Podcaster from "@/components/Podcaster";
+import Maintemplate from "@/components/Templates/MainTemplate";
+import { useParams } from "next/navigation";
 
 const Podcast = () => {
-    const params = useParams()
-    console.log({ params });
+  const params = useParams();
+  console.log({ params });
 
-    return (
-        <div>Podcast</div>
-    )
-}
+  return (
+    <Maintemplate>
+      <Podcaster />
+    </Maintemplate>
+  );
+};
 
-export default Podcast
+export default Podcast;

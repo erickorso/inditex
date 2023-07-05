@@ -1,9 +1,10 @@
-import styles from './page.module.css'
+import Podcaster from "@/components/Podcaster";
+import Maintemplate from "@/components/Templates/MainTemplate";
 
-export default function Home() {
+export default function HomePageApp() {
   return (
-    <main className={styles.main}>
-      Home
-    </main>
-  )
+    <Maintemplate>
+      <Podcaster />
+    </Maintemplate>
+  );
 }
