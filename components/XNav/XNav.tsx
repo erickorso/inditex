@@ -1,4 +1,3 @@
-"use client";
 import XH1 from "../Atoms/XH1";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
