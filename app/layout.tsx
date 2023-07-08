@@ -1,4 +1,5 @@
 'use client'
+import StyledComponentsRegistry from '@/lib/StyleRegistry'
 import { store } from '@/lib/redux/store'
 import './globals.css'
 import { Inter } from 'next/font/google'
@@ -20,7 +21,7 @@ export default function RootLayout({
     <Provider store={store}>
       <html lang="en">
         <body className={inter.className}>
-          {children}
+          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
         </body>
       </html>
     </Provider>

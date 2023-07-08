@@ -1,11 +1,22 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        domains: []
+    experimental: {
+        serverActions: true,
     },
+    reactStrictMode: true,
+    images: {
+        remotePatterns: [
+          {
+            protocol: 'https',
+            hostname: 'is**',
+          },
+        ],
+        // domains: ['is3-ssl.mzstatic.com'],
+      },
     compiler: {
         styledComponents: true,
     }
 }
 
 module.exports = nextConfig
+

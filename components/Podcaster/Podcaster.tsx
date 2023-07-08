@@ -1,23 +1,40 @@
 'use client'
-import { useState, useEffect } from 'react'
-import { PodcasterStyle } from './style'
-import { RootState } from '@/lib/redux/store'
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchPodcasts } from '@/lib/redux/reducers/podcasts'
+import { useGetData } from '@/lib/hooks/useGetData';
+import Loading from '@/components/Loading';
+import Card from '@/components/Cards/Card';
+import { createCookie } from '@/lib/helpers/cookies';
 
-export default async function Page() {
+const Podcasts = () => {
+    const { data, loading, error } = (useGetData('https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json'))
+    const entries = data?.feed?.entry
 
-    const {data, error, loading} = useSelector((state: RootState) => state.podcasts)
-    const dispatch = useDispatch();  
-    
-    useEffect(() => {
-        if(!data[1] && !error && !loading){
-            console.log(data);
-            fetchPodcasts(dispatch)
-        }
-    }, [data, error, loading])
-
+    // if (data && entries) {
+    //     createCookie(entries, 'podcasts', '/')
+    // }
+    {
+        if (loading) return <Loading loading={loading} error={error} />
+    }
     return (
-        <PodcasterStyle>{JSON.stringify(data)}</PodcasterStyle>
-    )
-}
+        <ul style={{ marginTop: '50px' }}>
+            {
+                data && entries ?
+                    entries.map((item: any) => {
+                        let itemInfo = {
+                            id: item.id.attributes["im:id"],
+                            name: item["im:name"].label,
+                            title: item.title.label,
+                            author: item["im:artist"].label,
+                            images: item["im:image"],
+                        }
+                        return (
+                            <li key={item.id.attributes["im:id"]}>
+                                <Card info={itemInfo} />
+                            </li>
+                        )
+                    })
+                    : null}
+        </ul>
+    );
+};
+
+export default Podcasts;
