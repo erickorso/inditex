@@ -10,7 +10,7 @@ const PodcastEpisodes = () => {
     const params: any = useParams()
     const { podcastId } = params
     const isLocal = process.env.NODE_ENV === 'development';
-    const baseUrl = isLocal ? 'http://localhost:3000' : process.env.NEXT_PUBLIC_VERCEL_URL
+    const baseUrl = isLocal ? 'http://localhost:3000' : ''
     const {
         data,
         loading,
