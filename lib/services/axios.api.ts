@@ -1,5 +1,8 @@
 import axios from "axios";
-const API = axios.create({ baseURL: "https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json" });
+
+const isLocal = process.env.NODE_ENV === 'development';
+const baseUrl = isLocal ? 'http://localhost:3000' : ''
+const API = axios.create({ baseURL: `${baseUrl}/api/podcasts`});
 
 API.interceptors.request.use((req) => {
     return req;

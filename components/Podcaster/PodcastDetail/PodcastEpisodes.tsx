@@ -9,11 +9,15 @@ import { PodcastEpisodesWrapper } from './style';
 const PodcastEpisodes = () => {
     const params: any = useParams()
     const { podcastId } = params
+    const isLocal = process.env.NODE_ENV === 'development';
+    const baseUrl = isLocal ? 'http://localhost:3000' : ''
     const {
         data,
         loading,
         error
-    } = useGetData(`https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=100`)
+    } = useGetData(
+        `${baseUrl}/api/podcasts/${podcastId}`
+    )
 
     const entriesEpisodes = data?.results
 
