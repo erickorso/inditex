@@ -19,7 +19,6 @@ export async function getCookie(name: string) {
   if(cookie?.name && cookie.value){
     return JSON.parse(cookie.value)
   }else{
-    console.log('cagada');
     return null
   }
   
@@ -29,8 +28,6 @@ export async function getCookie(name: string) {
   export const setCookie = (name: string, value: any, days: number) => {
     const isClient = typeof document !== 'undefined';
     if(isClient){
-      console.log('here');
-      
         const date = new Date();
         date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
         const expires = `expires=${date.toUTCString()}`;
