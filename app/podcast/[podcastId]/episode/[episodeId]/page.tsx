@@ -1,10 +1,11 @@
-import Podcaster from "@/components/Podcaster";
+'use client'
+import PodcastEpisodeDetailPage from "@/components/Podcaster/PodcastDetail/PodcastEpisodeDetailPage";
 import Maintemplate from "@/components/Templates/MainTemplate";
 
 export default function HomePageApp() {
   return (
     <Maintemplate>
-      <Podcaster />
+      <PodcastEpisodeDetailPage />
     </Maintemplate>
   );
 }
