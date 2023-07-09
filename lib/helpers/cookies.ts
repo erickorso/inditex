@@ -34,21 +34,3 @@ export async function getCookie(name: string) {
         document.cookie = `${name}=${value}; ${expires}; path=/`;
     }
   };
-
-  // export const getCookie = (name: string) => {
-  //   const isClient = typeof document !== 'undefined';
-  //   if(isClient){
-  //       const cookieName = `${name}=`;
-  //       const cookieArray = document.cookie.split(';');
-  //       for (let i = 0; i < cookieArray.length; i++) {
-  //         let cookie = cookieArray[i];
-  //         while (cookie.charAt(0) === ' ') {
-  //           cookie = cookie.substring(1);
-  //         }
-  //         if (cookie.indexOf(cookieName) === 0) {
-  //           return cookie.substring(cookieName.length, cookie.length);
-  //         }
-  //       }
-  //       return '';
-  //   }
-  // };
