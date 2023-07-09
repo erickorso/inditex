@@ -1,5 +1,5 @@
 'use client'
-import StyledComponentsRegistry from '@/lib/StyleRegistry'
+import StyledComponentsRegistry from '@/app/registry'
 import { store } from '@/lib/redux/store'
 import './globals.css'
 import { Inter } from 'next/font/google'
