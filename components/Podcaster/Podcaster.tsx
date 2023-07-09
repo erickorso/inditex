@@ -1,39 +1,57 @@
 'use client'
-import { useGetData } from '@/lib/hooks/useGetData';
+import { useSelector } from 'react-redux';
 import Loading from '@/components/Loading';
 import Card from '@/components/Cards/Card';
-import { createCookie } from '@/lib/helpers/cookies';
+import { useGetPodcasts } from '@/lib/hooks/useGetPodcasts';
+import Search from '@/components/Search';
+import { RootState } from '@/lib/redux/store';
+
+const filterPodcasts = (data: any[], searchText: string): any[] => {
+    const filteredBooks = data.filter((podcast: any) => {
+        const title = (podcast.title?.label || '').toLowerCase();
+        const author = (podcast['im:artist']?.label || '').toLowerCase();
+        return title.includes(searchText.toLowerCase()) || author.includes(searchText.toLowerCase());
+    });
+
+    return filteredBooks;
+};
 
 const Podcasts = () => {
-    const { data, loading, error } = (useGetData('https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json'))
-    const entries = data?.feed?.entry
+    const { data, loading, error } = useGetPodcasts()
+    let info = data
+    const searchValue = useSelector((state: RootState) => state.search.label);
 
-    // if (data && entries) {
-    //     createCookie(entries, 'podcasts', '/')
-    // }
+    if (searchValue !== '') {
+        const filteredBooks = filterPodcasts(data, searchValue);
+        info = filteredBooks;
+    }
+
     {
         if (loading) return <Loading loading={loading} error={error} />
     }
     return (
-        <ul style={{ marginTop: '50px' }}>
-            {
-                data && entries ?
-                    entries.map((item: any) => {
-                        let itemInfo = {
-                            id: item.id.attributes["im:id"],
-                            name: item["im:name"].label,
-                            title: item.title.label,
-                            author: item["im:artist"].label,
-                            images: item["im:image"],
-                        }
-                        return (
-                            <li key={item.id.attributes["im:id"]}>
-                                <Card info={itemInfo} />
-                            </li>
-                        )
-                    })
-                    : null}
-        </ul>
+        <>
+            <Search />
+            <ul style={{ marginTop: '50px' }}>
+                {
+                    info ?
+                        info.map((item: any) => {
+                            let itemInfo = {
+                                id: item.id.attributes["im:id"],
+                                name: item["im:name"].label,
+                                title: item.title.label,
+                                author: item["im:artist"].label,
+                                images: item["im:image"],
+                            }
+                            return (
+                                <li key={item.id.attributes["im:id"]}>
+                                    <Card info={itemInfo} />
+                                </li>
+                            )
+                        })
+                        : null}
+            </ul>
+        </>
     );
 };
 

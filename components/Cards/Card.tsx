@@ -20,12 +20,12 @@ type CardType = {
     info: ItemInfoType
 }
 
-const Card: FC<CardType> = ({info}) => {
+const Card: FC<CardType> = ({ info }) => {
     return (
         <Link href={`/podcast/${info.id}`}>
             <div>
-                <Image src={info.images[2].label} width={200} height={200} alt={info.name}/>
-                <XH2 title={info.name}/>
+                <Image src={info.images[2].label} width={200} height={200} alt={info.name} priority={true} />
+                <XH2 title={info.name} />
                 <p>{info.author}</p>
             </div>
         </Link>

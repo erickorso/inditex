@@ -6,13 +6,13 @@ import Image from "next/image";
 
 const XNav = () => {
 
-    const path = usePathname();
+    const path: any = usePathname();
 
     const isHome = (path: string) => path === '/' || path === '/podcast'
 
     return <XNavStyle>
         <div className="logo">
-            <Image src={'/logo.jpg'} width={256} height={155} alt="logo" priority={false} />
+            <Image src={'/logo.jpg'} width={256} height={155} alt="logo" priority={true} />
         </div>
         {
             isHome(path) ?

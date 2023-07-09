@@ -5,7 +5,7 @@ import { redirect, useParams } from "next/navigation";
 import XAudio from "@/components/XAudio";
 
 const PodcastEpisodeDetail = () => {
-    const params = useParams();
+    const params: any = useParams();
     const { podcastId, episodeId } = params;
     const { data, loading, error } = useGetData(
         `https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=100`

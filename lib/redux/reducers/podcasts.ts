@@ -19,16 +19,26 @@ const PodcastsSlice = createSlice({
   name: 'podcasts',
   initialState,
   reducers: {
-    getPodcastsStart(state) {
+    setPodcastsStart(state) {
       state.loading = true
       state.error = null
     },
-    getPodcastsSuccess(state, action) {
-      state.data = action.payload?.data
+    setPodcastsSuccess(state, action) {
+      state.data = action.payload?.feed?.entry
       state.loading = false
       state.error = null
     },
-    getPodcastsFailure(state, action) {
+    getPodcastsFromStorage(state, action) {
+      state.data = action.payload?.feed?.entry
+      state.loading = false
+      state.error = null
+    },
+    setPodcastsFromStorage(state, action) {
+      state.data = action.payload?.feed?.entry
+      state.loading = false
+      state.error = null
+    },
+    setPodcastsFailure(state, action) {
       state.loading = false
       state.error = action.payload
     },
@@ -36,20 +46,33 @@ const PodcastsSlice = createSlice({
 });
 
 export const {
-  getPodcastsStart,
-  getPodcastsSuccess,
-  getPodcastsFailure,
+  setPodcastsStart,
+  setPodcastsSuccess,
+  getPodcastsFromStorage,
+  setPodcastsFailure,
 } = PodcastsSlice.actions
 
 export const fetchPodcasts = async (dispatch: Function) => {
   try {
-    dispatch(getPodcastsStart());
+    dispatch(setPodcastsStart());
     setTimeout(async () => {
-        const Podcasts = await getPodcastsService();
-        dispatch(getPodcastsSuccess(Podcasts));
+        const podcasts = await getPodcastsService();
+        localStorage.setItem('podcasts', JSON.stringify(podcasts));
+        dispatch(setPodcastsSuccess(podcasts));
     }, 200)
   } catch (error: any) {
-    dispatch(getPodcastsFailure(error.message));
+    dispatch(setPodcastsFailure(error.message));
+  }
+};
+
+export const storePodcasts = async (dispatch: Function, podcasts: any) => {
+  try {
+    dispatch(setPodcastsStart());
+    setTimeout(async () => {
+        dispatch(getPodcastsFromStorage(podcasts));
+    }, 200)
+  } catch (error: any) {
+    dispatch(setPodcastsFailure(error.message));
   }
 };
 

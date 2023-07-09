@@ -6,9 +6,9 @@ import { changeDate, millisToTime } from '@/lib/helpers/functions';
 import Link from 'next/link';
 
 const PodcastEpisodes = () => {
-    const params = useParams()
+    const params: any = useParams()
     const { podcastId } = params
-    const { 
+    const {
         data,
         loading,
         error
@@ -16,7 +16,7 @@ const PodcastEpisodes = () => {
 
     const entriesEpisodes = data?.results
 
-    const info = (entriesEpisodes && entriesEpisodes[0]) ? entriesEpisodes[0] : { trackCount: 0}
+    const info = (entriesEpisodes && entriesEpisodes[0]) ? entriesEpisodes[0] : { trackCount: 0 }
 
     const { trackCount } = info
 
@@ -27,34 +27,34 @@ const PodcastEpisodes = () => {
     }
 
     {
-        if(loading) return <Loading loading={loading} error={error}/>
+        if (loading) return <Loading loading={loading} error={error} />
     }
 
     return (
         <>
             <div className='counter'>{trackCount}</div>
-            <ul style={{marginTop: '50px'}}>
+            <ul style={{ marginTop: '50px' }}>
                 <li className='list-header'>
                     <div className='name'>Title</div>
                     <div className='date'>Date</div>
                     <div className='duration'>Duration</div>
                 </li>
-                { 
-                    data && copyArr  ? 
-                    copyArr.map((item: any) => {
-                        return (
-                            <li key={item.trackId}>
-                                <Link href={`/podcast/${podcastId}/episode/${item.episodeGuid}`}>
-                                    <div className='name'>{item.trackName}</div>
-                                    <div className='date'>{changeDate(item.releaseDate)}</div>
-                                    <div className='duration'>{millisToTime(item.trackTimeMillis)}</div>
-                                </Link>
-                            </li>
-                        )
-                    })
-                    : null
+                {
+                    data && copyArr ?
+                        copyArr.map((item: any) => {
+                            return (
+                                <li key={item.trackId}>
+                                    <Link href={`/podcast/${podcastId}/episode/${item.episodeGuid}`}>
+                                        <div className='name'>{item.trackName}</div>
+                                        <div className='date'>{changeDate(item.releaseDate)}</div>
+                                        <div className='duration'>{millisToTime(item.trackTimeMillis)}</div>
+                                    </Link>
+                                </li>
+                            )
+                        })
+                        : null
                 }
-            </ul> 
+            </ul>
         </>
     );
 };

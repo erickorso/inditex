@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import podcasts from '@/lib/redux/reducers/podcasts'
-import podcast from '@/lib/redux/reducers/podcast'
+import search from '@/lib/redux/reducers/search'
 
 export const store = configureStore({
   reducer: {
     podcasts,
-    podcast
+    search
   },
 })
 
