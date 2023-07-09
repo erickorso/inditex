@@ -1,13 +1,11 @@
 'use client'
-import CardXl from "@/components/Cards/CardXl";
-import PodcastEpisodeDetail from "@/components/Podcaster/PodcastDetail/PodcastEpisodeDetail";
+import PodcastEpisodeDetailPage from "@/components/Podcaster/PodcastDetail/PodcastEpisodeDetailPage";
 import Maintemplate from "@/components/Templates/MainTemplate";
 
 export default function HomePageApp() {
   return (
     <Maintemplate>
-      <CardXl />
-      <PodcastEpisodeDetail />
+      <PodcastEpisodeDetailPage />
     </Maintemplate>
   );
 }

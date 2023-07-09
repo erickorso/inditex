@@ -1,7 +1,12 @@
-import Image from "next/image"
 import { FC } from "react"
-import XH2 from "@/components/Atoms/XH2"
 import Link from "next/link"
+import {
+    CardImage,
+    CardImageWrapper,
+    CardSubtitle,
+    CardTitle,
+    CardWrapper
+} from "./style"
 
 type ImageType = {
     label: string,
@@ -23,11 +28,13 @@ type CardType = {
 const Card: FC<CardType> = ({ info }) => {
     return (
         <Link href={`/podcast/${info.id}`}>
-            <div>
-                <Image src={info.images[2].label} width={200} height={200} alt={info.name} priority={true} />
-                <XH2 title={info.name} />
-                <p>{info.author}</p>
-            </div>
+            <CardWrapper>
+                <CardImageWrapper>
+                    <CardImage src={info.images[2].label} width={200} height={200} alt={info.name} priority={true} />
+                </CardImageWrapper>
+                <CardTitle title={info.name} />
+                <CardSubtitle>{info.author}</CardSubtitle>
+            </CardWrapper>
         </Link>
     )
 }

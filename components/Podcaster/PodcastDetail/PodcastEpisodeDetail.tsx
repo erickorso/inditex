@@ -3,6 +3,8 @@ import { useGetData } from "@/lib/hooks/useGetData";
 import Loading from "@/components/Loading";
 import { redirect, useParams } from "next/navigation";
 import XAudio from "@/components/XAudio";
+import { PodcastEpisodesAudioWrapper } from "./style";
+import Link from "next/link";
 
 const PodcastEpisodeDetail = () => {
     const params: any = useParams();
@@ -25,15 +27,21 @@ const PodcastEpisodeDetail = () => {
         if (loading) return <Loading loading={loading} error={error} />;
     }
 
+    const createMarkup = (html: any) => {
+        return { __html: html };
+    };
+
     return (
-        <div style={{ marginTop: "50px" }}>
+        <PodcastEpisodesAudioWrapper>
+            <div className="go-back"><Link href={`/podcast/${podcastId}`}>Back</Link></div>
             {data && currentPodcastEpisode ? (
                 <div>
-                    {currentPodcastEpisode.trackName}
+                    <h3>{currentPodcastEpisode.trackName}</h3>
+                    <p dangerouslySetInnerHTML={createMarkup(currentPodcastEpisode.description)} />
                     <XAudio url={currentPodcastEpisode.episodeUrl} />
                 </div>
             ) : null}
-        </div>
+        </PodcastEpisodesAudioWrapper>
     );
 };
 

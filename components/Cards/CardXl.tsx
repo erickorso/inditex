@@ -5,6 +5,7 @@ import { redirect, useParams } from "next/navigation"
 import XH2 from "@/components/Atoms/XH2"
 import Loading from '@/components/Loading';
 import { useGetPodcasts } from "@/lib/hooks/useGetPodcasts"
+import { CardXlImageWrapper } from "./style"
 
 type CardXlType = {}
 
@@ -14,6 +15,7 @@ const DEFAULT_INFO = {
     title: '',
     author: '',
     images: [],
+    summary: ''
 }
 
 const CardXl: FC<CardXlType> = () => {
@@ -27,11 +29,12 @@ const CardXl: FC<CardXlType> = () => {
     }
 
     const info = currentPodcast ? {
-        id: currentPodcast.id.attributes["im:id"],
-        name: currentPodcast["im:name"].label,
-        title: currentPodcast.title.label,
-        author: currentPodcast["im:artist"].label,
+        id: currentPodcast?.id?.attributes["im:id"],
+        name: currentPodcast["im:name"]?.label,
+        title: currentPodcast?.title?.label,
+        author: currentPodcast["im:artist"]?.label,
         images: currentPodcast["im:image"],
+        summary: currentPodcast?.summary?.label,
     } : DEFAULT_INFO
 
     {
@@ -43,11 +46,17 @@ const CardXl: FC<CardXlType> = () => {
             {
                 data && currentPodcast ?
                     <Link href={`/podcast/${info.id}`}>
-                        <div>
+                        <CardXlImageWrapper>
                             <Image src={info.images[2].label} width={200} height={200} alt={info.name} />
+                            <hr />
                             <XH2 title={info.name} />
                             <p>{info.author}</p>
-                        </div>
+                            <hr />
+                            <div className="description">
+                                <h3>Description</h3>
+                                <p>{info.summary}</p>
+                            </div>
+                        </CardXlImageWrapper>
                     </Link>
                     : null
             }

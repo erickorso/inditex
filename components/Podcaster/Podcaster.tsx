@@ -5,6 +5,7 @@ import Card from '@/components/Cards/Card';
 import { useGetPodcasts } from '@/lib/hooks/useGetPodcasts';
 import Search from '@/components/Search';
 import { RootState } from '@/lib/redux/store';
+import styled from 'styled-components';
 
 const filterPodcasts = (data: any[], searchText: string): any[] => {
     const filteredBooks = data.filter((podcast: any) => {
@@ -15,6 +16,15 @@ const filterPodcasts = (data: any[], searchText: string): any[] => {
 
     return filteredBooks;
 };
+
+const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 50px;
+  width: 90%;
+  padding: 20px;
+  margin-top: 40px;
+`;
 
 const Podcasts = () => {
     const { data, loading, error } = useGetPodcasts()
@@ -32,7 +42,7 @@ const Podcasts = () => {
     return (
         <>
             <Search />
-            <ul style={{ marginTop: '50px' }}>
+            <GridContainer>
                 {
                     info ?
                         info.map((item: any) => {
@@ -44,13 +54,11 @@ const Podcasts = () => {
                                 images: item["im:image"],
                             }
                             return (
-                                <li key={item.id.attributes["im:id"]}>
-                                    <Card info={itemInfo} />
-                                </li>
+                                <Card info={itemInfo} key={item.id.attributes["im:id"]} />
                             )
                         })
                         : null}
-            </ul>
+            </GridContainer>
         </>
     );
 };

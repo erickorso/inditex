@@ -4,6 +4,7 @@ import Loading from '@/components/Loading';
 import { useParams } from 'next/navigation'
 import { changeDate, millisToTime } from '@/lib/helpers/functions';
 import Link from 'next/link';
+import { PodcastEpisodesWrapper } from './style';
 
 const PodcastEpisodes = () => {
     const params: any = useParams()
@@ -32,29 +33,31 @@ const PodcastEpisodes = () => {
 
     return (
         <>
-            <div className='counter'>{trackCount}</div>
-            <ul style={{ marginTop: '50px' }}>
-                <li className='list-header'>
+            <PodcastEpisodesWrapper>
+                <span className="title">Episodes: {trackCount}</span>
+            </PodcastEpisodesWrapper>
+            <PodcastEpisodesWrapper style={{ marginTop: '50px' }}>
+                <div className='list-header'>
                     <div className='name'>Title</div>
                     <div className='date'>Date</div>
                     <div className='duration'>Duration</div>
-                </li>
+                </div>
                 {
                     data && copyArr ?
                         copyArr.map((item: any) => {
                             return (
-                                <li key={item.trackId}>
+                                <div key={item.trackId} className='list-item'>
                                     <Link href={`/podcast/${podcastId}/episode/${item.episodeGuid}`}>
                                         <div className='name'>{item.trackName}</div>
                                         <div className='date'>{changeDate(item.releaseDate)}</div>
                                         <div className='duration'>{millisToTime(item.trackTimeMillis)}</div>
                                     </Link>
-                                </li>
+                                </div>
                             )
                         })
                         : null
                 }
-            </ul>
+            </PodcastEpisodesWrapper>
         </>
     );
 };
