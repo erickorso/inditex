@@ -11,7 +11,6 @@ const nextConfig = {
             hostname: 'is**',
           },
         ],
-        // domains: ['is3-ssl.mzstatic.com'],
       },
     compiler: {
         styledComponents: true,
