@@ -18,3 +18,7 @@ export function changeDate(dateString: string): string {
   
     return formattedTime;
   }
+
+  export function getRandomNumber() {
+    return Math.floor(Math.random() * 20) + 1;
+  }

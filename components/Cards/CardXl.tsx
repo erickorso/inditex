@@ -6,6 +6,7 @@ import XH2 from "@/components/Atoms/XH2"
 import Loading from '@/components/Loading';
 import { useGetPodcasts } from "@/lib/hooks/useGetPodcasts"
 import { CardXlImageWrapper } from "./style"
+import { motion } from 'framer-motion';
 
 type CardXlType = {}
 
@@ -47,7 +48,14 @@ const CardXl: FC<CardXlType> = () => {
                 data && currentPodcast ?
                     <Link href={`/podcast/${info.id}`}>
                         <CardXlImageWrapper>
-                            <Image src={info.images[2].label} width={200} height={200} alt={info.name} />
+                            <motion.div
+                                className="product-card"
+                                initial={{ opacity: 0.2, scale: 1.1 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.5, delay: 10 * 0.08 }}
+                            >
+                                <Image src={info.images[2].label} width={200} height={200} alt={info.name} />
+                            </motion.div>
                             <hr />
                             <XH2 title={info.name} />
                             <p>{info.author}</p>
