@@ -21,7 +21,7 @@ export const useGetPodcasts = () => {
         }
       }
     }
-  }, [data]);
+  }, [data, loading, error, dispatch]);
 
   return {
     data,

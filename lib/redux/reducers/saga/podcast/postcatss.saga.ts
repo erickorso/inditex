@@ -4,7 +4,7 @@ import ROUTES from '@/lib/constants/routes.ctte'
 
 function* workGetData():any{
     try {
-        const podcasts = yield call(() => fetch(`${ROUTES.router.podcast}/api${ROUTES.router.podcast}`))
+        const podcasts = yield call(() => fetch(`/api${ROUTES.router.podcast}`))
         const formatedPodcast = yield podcasts.json() 
         yield put(setPodcastsSuccess(formatedPodcast?.feed?.entry))
     } catch (error) {

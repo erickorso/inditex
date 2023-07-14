@@ -8,7 +8,7 @@ import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 
-const PodcasterWithSaga = memo(() => {
+const PodcasterWithSaga = () => {
 
     const { data, loading, error } = useSelector((state: any) => state.podcastsSaga)
     const searchValue = useSelector((state: RootState) => state.search.label);
@@ -17,7 +17,7 @@ const PodcasterWithSaga = memo(() => {
 
     useEffect(() => {
         dispatch(setPodcastsStart())
-    }, [dispatch, setPodcastsStart])
+    }, [dispatch])
 
     if (searchValue !== '') {
         const filteredBooks = filterPodcasts([...data], searchValue);
@@ -47,6 +47,6 @@ const PodcasterWithSaga = memo(() => {
                     : null}
         </GridContainer>
     );
-})
+}
 
 export default PodcasterWithSaga

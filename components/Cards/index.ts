@@ -1,7 +1,9 @@
 import Card from "./Card";
 import CardXl from "./CardXl";
 
-export default {
+const exportedComponents = {
     Card,
     CardXl
-}
+};
+  
+  export default exportedComponents;

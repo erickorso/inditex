@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const getPodcatsHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       const response = await fetch(`https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json`);
       const data = await response.json();
@@ -10,3 +10,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(500).json({ error: 'Something went wrong' });
     }
   };
+
+  export default getPodcatsHandler;
