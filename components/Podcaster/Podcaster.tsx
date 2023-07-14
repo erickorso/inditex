@@ -7,7 +7,7 @@ import Search from '@/components/Search';
 import { RootState } from '@/lib/redux/store';
 import styled from 'styled-components';
 
-const filterPodcasts = (data: any[], searchText: string): any[] => {
+export const filterPodcasts = (data: any[], searchText: string): any[] => {
     const filteredBooks = data.filter((podcast: any) => {
         const title = (podcast.title?.label || '').toLowerCase();
         const author = (podcast['im:artist']?.label || '').toLowerCase();
@@ -17,7 +17,7 @@ const filterPodcasts = (data: any[], searchText: string): any[] => {
     return filteredBooks;
 };
 
-const GridContainer = styled.div`
+export const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 50px;
