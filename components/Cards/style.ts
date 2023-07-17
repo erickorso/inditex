@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import XH2 from "@/components/Atoms/XH2"
 import Image from "next/image"
 
-export const CardWrapper = styled.a`
+export const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

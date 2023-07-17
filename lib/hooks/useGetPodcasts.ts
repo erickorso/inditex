@@ -10,7 +10,7 @@ export const useGetPodcasts = () => {
   useEffect(() => {
     const isClient = typeof document !== "undefined";
     if (isClient) {
-      if (data.length === 0) {
+      if (data && data.length === 0) {
         const storedData = localStorage.getItem("podcasts");
         if (!loading && !error) {
           if (storedData) {

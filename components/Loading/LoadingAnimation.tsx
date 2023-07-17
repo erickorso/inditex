@@ -56,7 +56,7 @@ const LoadingCircle = styled.div`
 const LoadingAnimation = () => {
   return (
     <LoadingContainer>
-      <LoadingCircle />
+      <LoadingCircle data-testid="loading-animation" />
     </LoadingContainer>
   );
 };

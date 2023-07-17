@@ -1,11 +1,12 @@
 'use client'
 import Card from "@/components/Cards/Card";
 import Loading from "@/components/Loading";
-import { GridContainer, filterPodcasts } from "@/components/Podcaster/Podcaster";
+import { GridContainer } from "@/components/Podcaster/Podcaster";
 import { setPodcastsStart } from "@/lib/redux/reducers/saga/podcast/slice.saga";
 import { RootState } from "@/lib/redux/store";
-import { memo, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { filterPodcasts } from "@/components/Podcaster/filterFunction";
 
 
 const PodcasterWithSaga = () => {

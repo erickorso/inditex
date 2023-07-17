@@ -6,7 +6,7 @@ import XAudio from "@/components/XAudio";
 import { PodcastEpisodesAudioWrapper } from "./style";
 import Link from "next/link";
 import ROUTES from "@/lib/constants/routes.ctte";
-import { isLocal } from "@/lib/helpers/functions";
+import { createMarkup, isLocal } from "@/lib/helpers/functions";
 
 const PodcastEpisodeDetail = () => {
     const params: any = useParams();
@@ -34,12 +34,8 @@ const PodcastEpisodeDetail = () => {
         if (loading) return <Loading loading={loading} error={error} />;
     }
 
-    const createMarkup = (html: any) => {
-        return { __html: html };
-    };
-
     return (
-        <PodcastEpisodesAudioWrapper>
+        <PodcastEpisodesAudioWrapper data-testid="podcast-episode-detail">
             <div className="go-back">
                 <Link href={`${ROUTES.router.podcast}/${podcastId}`}>Back</Link>
             </div>

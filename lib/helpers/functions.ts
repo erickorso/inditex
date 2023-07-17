@@ -20,3 +20,7 @@ export function changeDate(dateString: string): string {
   }
 
   export const isLocal = () => process.env.NODE_ENV === 'development';
+
+  export const createMarkup = (html: any) => {
+    return { __html: html };
+  };
