@@ -31,7 +31,7 @@ const PodcastEpisodeDetail = () => {
     }
 
     {
-        if (loading) return <Loading loading={loading} error={error} />;
+        if (loading || error) return <Loading loading={loading} error={error} />;
     }
 
     return (

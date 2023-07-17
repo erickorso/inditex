@@ -21,8 +21,6 @@ export async function getCookie(name: string) {
   }else{
     return null
   }
-  
-  
 }
 
   export const setCookie = (name: string, value: any, days: number) => {
