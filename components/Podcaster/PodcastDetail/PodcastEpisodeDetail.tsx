@@ -5,18 +5,19 @@ import { redirect, useParams } from "next/navigation";
 import XAudio from "@/components/XAudio";
 import { PodcastEpisodesAudioWrapper } from "./style";
 import Link from "next/link";
+import ROUTES from "@/lib/constants/routes.ctte";
+import { createMarkup, isLocal } from "@/lib/helpers/functions";
 
 const PodcastEpisodeDetail = () => {
     const params: any = useParams();
     const { podcastId, episodeId } = params;
-    const isLocal = process.env.NODE_ENV === 'development';
-    const baseUrl = isLocal ? 'http://localhost:3000' : ''
+    const baseUrl = isLocal() ? ROUTES.baseUrl.local : ''
     const {
         data,
         loading,
         error
     } = useGetData(
-        `${baseUrl}/api/podcasts/${podcastId}`
+        `${baseUrl}/api${ROUTES.router.podcast}/${podcastId}`
     )
 
     const entriesEpisodes = data?.results;
@@ -26,20 +27,18 @@ const PodcastEpisodeDetail = () => {
         entriesEpisodes.find((en: any) => en?.episodeGuid === episodeId);
 
     if (data && !currentPodcastEpisode) {
-        redirect('/podcast')
+        redirect(ROUTES.router.podcast)
     }
 
     {
         if (loading) return <Loading loading={loading} error={error} />;
     }
 
-    const createMarkup = (html: any) => {
-        return { __html: html };
-    };
-
     return (
-        <PodcastEpisodesAudioWrapper>
-            <div className="go-back"><Link href={`/podcast/${podcastId}`}>Back</Link></div>
+        <PodcastEpisodesAudioWrapper data-testid="podcast-episode-detail">
+            <div className="go-back">
+                <Link href={`${ROUTES.router.podcast}/${podcastId}`}>Back</Link>
+            </div>
             {data && currentPodcastEpisode ? (
                 <div>
                     <h3>{currentPodcastEpisode.trackName}</h3>

@@ -22,10 +22,13 @@ const Search: FC = () => {
     };
 
     useEffect(() => {
-        return () => {
-            setSearchAction(dispatch, '');
-        };
-    }, []);
+        if (searchValue !== '') {
+            return () => {
+                setSearchAction(dispatch, '');
+            };
+        }
+        // eslint-disable-next-line
+    }, [dispatch]);
 
     return (
         <SearchContainer>

@@ -6,18 +6,10 @@ import { useGetPodcasts } from '@/lib/hooks/useGetPodcasts';
 import Search from '@/components/Search';
 import { RootState } from '@/lib/redux/store';
 import styled from 'styled-components';
+import { filterPodcasts } from './filterFunction';
+import { stringify } from 'querystring';
 
-const filterPodcasts = (data: any[], searchText: string): any[] => {
-    const filteredBooks = data.filter((podcast: any) => {
-        const title = (podcast.title?.label || '').toLowerCase();
-        const author = (podcast['im:artist']?.label || '').toLowerCase();
-        return title.includes(searchText.toLowerCase()) || author.includes(searchText.toLowerCase());
-    });
-
-    return filteredBooks;
-};
-
-const GridContainer = styled.div`
+export const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 50px;
@@ -37,12 +29,12 @@ const Podcasts = () => {
     }
 
     {
-        if (loading) return <Loading loading={loading} error={error} />
+        if (loading || error) return <Loading loading={loading} error={error} />
     }
     return (
         <>
             <Search />
-            <GridContainer>
+            <GridContainer data-testid="podcaster-grid-container">
                 {
                     info ?
                         info.map((item: any) => {

@@ -8,7 +8,7 @@ type LoadingType = {
 
 const Loading: FC<LoadingType> = ({ loading, error }) => {
     {
-        if (loading) return <LoadingAnimation />
+        if (loading) return <LoadingAnimation data-testid="loading-animation" />
     }
     {
         if (error) return <h1 style={{ marginTop: '50px', color: 'red' }}>Error: {error}</h1>
