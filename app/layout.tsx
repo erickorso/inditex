@@ -1,9 +1,8 @@
 'use client'
 import StyledComponentsRegistry from '@/app/registry'
-import { store } from '@/lib/redux/store'
 import './globals.css'
 import { Inter } from 'next/font/google'
-import { Provider } from 'react-redux'
+import ReduxProvider from '@/lib/providers/ReduxProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,12 +17,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <Provider store={store}>
+    <ReduxProvider>
       <html lang="en">
         <body className={inter.className}>
           <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
         </body>
       </html>
-    </Provider>
+    </ReduxProvider>
   )
 }

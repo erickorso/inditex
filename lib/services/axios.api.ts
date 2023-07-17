@@ -1,8 +1,9 @@
 import axios from "axios";
+import ROUTES from "../constants/routes.ctte";
+import { isLocal } from "../helpers/functions";
 
-const isLocal = process.env.NODE_ENV === 'development';
-const baseUrl = isLocal ? 'http://localhost:3000' : ''
-const API = axios.create({ baseURL: `${baseUrl}/api/podcasts`});
+const baseUrl = isLocal() ? ROUTES.baseUrl.local : ''
+const API = axios.create({ baseURL: `${baseUrl}/api${ROUTES.router.podcast}`});
 
 API.interceptors.request.use((req) => {
     return req;

@@ -2,22 +2,22 @@
 import { useGetData } from '@/lib/hooks/useGetData';
 import Loading from '@/components/Loading';
 import { useParams } from 'next/navigation'
-import { changeDate, millisToTime } from '@/lib/helpers/functions';
+import { changeDate, isLocal, millisToTime } from '@/lib/helpers/functions';
 import Link from 'next/link';
 import { PodcastEpisodesWrapper } from './style';
 import { motion } from 'framer-motion';
+import ROUTES from '@/lib/constants/routes.ctte';
 
 const PodcastEpisodes = () => {
     const params: any = useParams()
     const { podcastId } = params
-    const isLocal = process.env.NODE_ENV === 'development';
-    const baseUrl = isLocal ? 'http://localhost:3000' : ''
+    const baseUrl = isLocal() ? ROUTES.baseUrl.local : ''
     const {
         data,
         loading,
         error
     } = useGetData(
-        `${baseUrl}/api/podcasts/${podcastId}`
+        `${baseUrl}/api${ROUTES.router.podcast}/${podcastId}`
     )
 
     const entriesEpisodes = data?.results
@@ -59,7 +59,7 @@ const PodcastEpisodes = () => {
                                     transition={{ duration: 0.5, delay: index * 0.08 }}
                                 >
                                     <div className='list-item'>
-                                        <Link href={`/podcast/${podcastId}/episode/${item.episodeGuid}`}>
+                                        <Link href={`${ROUTES.router.podcast}/${podcastId}/episode/${item.episodeGuid}`}>
                                             <div className='name'>{item.trackName}</div>
                                             <div className='date'>{changeDate(item.releaseDate)}</div>
                                             <div className='duration'>{millisToTime(item.trackTimeMillis)}</div>

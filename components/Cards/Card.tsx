@@ -9,6 +9,7 @@ import {
     CardWrapper
 } from "./style"
 import { getRandomNumber } from "@/lib/helpers/functions";
+import ROUTES from "@/lib/constants/routes.ctte";
 
 type ImageType = {
     label: string,
@@ -29,7 +30,7 @@ type CardType = {
 
 const Card: FC<CardType> = ({ info }) => {
     return (
-        <Link href={`/podcast/${info.id}`}>
+        <Link href={`${ROUTES.router.podcast}/${info.id}`}>
             <motion.div
                 className="product-card"
                 initial={{ opacity: 0, scale: 0.8 }}

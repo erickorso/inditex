@@ -7,6 +7,7 @@ import Loading from '@/components/Loading';
 import { useGetPodcasts } from "@/lib/hooks/useGetPodcasts"
 import { CardXlImageWrapper } from "./style"
 import { motion } from 'framer-motion';
+import ROUTES from "@/lib/constants/routes.ctte"
 
 type CardXlType = {}
 
@@ -23,10 +24,10 @@ const CardXl: FC<CardXlType> = () => {
     const params: any = useParams()
     const { data, loading, error } = useGetPodcasts()
     const { podcastId } = params
-    const currentPodcast = data && data.find((en: any) => en.id.attributes["im:id"] === podcastId)
+    const currentPodcast = data.find((en: any) => en.id.attributes["im:id"] === podcastId)
 
     if (data && !currentPodcast) {
-        redirect('/podcast')
+        redirect(ROUTES.router.podcast)
     }
 
     const info = currentPodcast ? {
@@ -46,7 +47,7 @@ const CardXl: FC<CardXlType> = () => {
         <>
             {
                 data && currentPodcast ?
-                    <Link href={`/podcast/${info.id}`}>
+                    <Link href={`${ROUTES.router.podcast}/${info.id}`} data-testid="card-xl">
                         <CardXlImageWrapper>
                             <motion.div
                                 className="product-card"

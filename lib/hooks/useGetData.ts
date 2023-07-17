@@ -27,7 +27,8 @@ export const useGetData = (url: string, err: null | string = '') => {
               });
         }, 1000)
     }
-  }, []);
+    // eslint-disable-next-line
+  }, [ERROR_MESSAGE]);
 
   return {
     data,
