@@ -40,7 +40,7 @@ const PodcastEpisodeDetail = () => {
                 <Link href={`${ROUTES.router.podcast}/${podcastId}`}>Back</Link>
             </div>
             {data && currentPodcastEpisode ? (
-                <div>
+                <div role="podcast-episode-detail">
                     <h3>{currentPodcastEpisode.trackName}</h3>
                     <p dangerouslySetInnerHTML={createMarkup(currentPodcastEpisode.description)} />
                     <XAudio url={currentPodcastEpisode.episodeUrl} />
