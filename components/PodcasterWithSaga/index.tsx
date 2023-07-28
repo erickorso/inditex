@@ -14,7 +14,7 @@ const PodcasterWithSaga = () => {
     const { data, loading, error } = useSelector((state: any) => state.podcastsSaga)
     const searchValue = useSelector((state: RootState) => state.search.label);
     const dispatch = useDispatch()
-    let info = [...data]
+    let info = Array.isArray(data) ? [...data] : []
 
     useEffect(() => {
         dispatch(setPodcastsStart())
@@ -26,11 +26,11 @@ const PodcasterWithSaga = () => {
     }
 
     {
-        if (loading) return <Loading loading={loading} error={error} />
+        if (loading || error) return <Loading loading={loading} error={error} />
     }
 
     return (
-        <GridContainer>
+        <GridContainer data-testid="saga-grid-container">
             {
                 info ?
                     info.map((item: any) => {
@@ -42,7 +42,7 @@ const PodcasterWithSaga = () => {
                             images: item["im:image"],
                         }
                         return (
-                            <Card info={itemInfo} key={item.id.attributes["im:id"]} />
+                            <Card info={itemInfo} key={item.id.attributes["im:id"]} data-testid="card-component" />
                         )
                     })
                     : null}
