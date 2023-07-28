@@ -40,7 +40,7 @@ const CardXl: FC<CardXlType> = () => {
     } : DEFAULT_INFO
 
     {
-        if (loading) return <Loading loading={loading} error={error} />
+        if (loading || error) return <Loading loading={loading} error={error} />
     }
 
     return (

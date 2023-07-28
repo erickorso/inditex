@@ -1,8 +1,20 @@
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import PodcastDetail from "@/components/Podcaster/PodcastDetail";
 import ReduxProvider from "../../../lib/providers/ReduxProvider";
 import cardMock from "../__mocks/cardMock";
 import episodeMock from "../__mocks/episodeMock";
+import { rest } from "msw";
+import { setupServer } from "msw/node";
+
+const server = setupServer(
+  rest.get("/api", (req, res, ctx) => {
+    return res(ctx.json({ name: "Erick" }));
+  })
+);
+
+beforeAll(() => server.listen());
+beforeEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
 const mockInfo = [cardMock];
 const mockInfoEpisodes = [1, episodeMock];
@@ -25,6 +37,7 @@ jest.mock("../../../lib/hooks/useGetPodcasts", () => ({
     };
   }),
 }));
+
 jest.mock("../../../lib/hooks/useGetData", () => ({
   useGetData: jest.fn(() => {
     return {
@@ -38,7 +51,7 @@ jest.mock("../../../lib/hooks/useGetData", () => ({
 }));
 
 describe("PodcastDetail", () => {
-  test("renders CardXl and PodcastEpisodeDetail components", () => {
+  test("renders CardXl and PodcastEpisodeDetail components", async () => {
     const { getByText } = render(
       <ReduxProvider>
         <PodcastDetail />

@@ -20,6 +20,7 @@ const customJestConfig = {
     "<rootDir>/public/",
     "<rootDir>/node_modules/",
   ],
+  coveragePathIgnorePatterns: ["/\\.next/"],
   collectCoverageFrom: [
     "<rootDir>/**/*.ts",
     "<rootDir>/**/*.tsx",

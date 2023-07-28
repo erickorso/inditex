@@ -14,9 +14,9 @@ const AudioElement = styled.audio`
 `;
 
 const XAudio: React.FC<XAudioProps> = ({ url }) => (
-    <AudioContainer>
-      {url && <AudioElement controls src={url} />}
-    </AudioContainer>
+  <AudioContainer>
+    {!!url && <AudioElement controls src={url} data-testid="audio-element" />}
+  </AudioContainer>
 )
 
 export default XAudio;
