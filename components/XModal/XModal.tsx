@@ -6,7 +6,7 @@ export function XModal() {
     return (
         <Drawer.Root>
             <Drawer.Trigger asChild>
-                <button>Open Drawer</button>
+                <button className="px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition duration-300 ease-in-out focus:outline-none">Open Drawer</button>
             </Drawer.Trigger>
             <Drawer.Portal>
                 <Drawer.Overlay className="fixed inset-0 bg-black/40" />
