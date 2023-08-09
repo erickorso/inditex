@@ -7,7 +7,6 @@ import Search from '@/components/Search';
 import { RootState } from '@/lib/redux/store';
 import styled from 'styled-components';
 import { filterPodcasts } from './filterFunction';
-import { stringify } from 'querystring';
 
 export const GridContainer = styled.div`
   display: grid;
